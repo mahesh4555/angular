@@ -1,0 +1,12 @@
+<p *ngIf="showchild">helloworld works!</p>
+
+<button  (click)="changeShow()">{{depParent}} {{depchild}}  Toggle</button>
+
+
+<ng-template host></ng-template>
+
+<button (click)="loadComponent(0)">HI</button>
+<button (click)="loadComponent(1)">HELLO</button>
+
+
+<p>{{"hello " |  append}}</p>
