@@ -1,0 +1,147 @@
+<!-- <p>content works! {{activeState}}</p>
+<p>{{activeState}}</p>
+<p>activeState</p> -->
+<!-- <mat-button color="green">Press me</mat-button> -->
+<button mat-raised-button color="primary">Press me</button>
+<br>
+
+<!-- 
+   <table>
+       <tr>
+           <td>ID</td>
+            <td>Name</td>
+            <td>CurrentState</td>
+            <td>Content</td>
+        </tr>
+
+        <!-- <ul *ngFor="let data  of todoData"></ul> -->
+
+        <!-- <tr *ngFor="let data  of currentStatetodosData">
+            <td>{{data._id}}</td>
+             <td>{{data.name}}</td>
+             <td>{{data.currentState}}</td>
+             <td>{{data.content}}</td>
+         </tr> --> 
+
+         <!-- <tr *ngFor="let data  of todoData">
+            <mat-card class="example-card">
+                <mat-card-header>
+                  <div mat-card-avatar class="example-header-image"></div>
+                  <mat-card-title>{{data.name}}</mat-card-title>
+                  <mat-card-subtitle>{{data.currentState}}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>
+                        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from
+                        Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu
+                        was originally bred for hunting.
+                      </p>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-button>LIKE</button>
+                  <button mat-button>SHARE</button>
+                </mat-card-actions>
+              </mat-card>
+         </tr> -->
+        <!-- </ul>  -->
+
+      
+   <!-- </table> -->
+   <!-- <mat-card>bsic crd</mat-card> -->
+ 
+   <br>
+   <br>
+   <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
+     <div  fxFlex="25%"  fxLayoutAlign=" stretch" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let data  of currentStatetodosData">
+            <mat-card  example-card list-content fxLayout="column">
+              
+                <mat-card-header fxLayout="column" fxFlex="30%" >
+                 
+                  <mat-card-title fxFlex="80%">{{data.name}}</mat-card-title>
+                  <mat-card-subtitle fxFlex="20%">State:{{data.currentState}}</mat-card-subtitle>
+              </mat-card-header>
+      
+
+                <mat-card-content  fxFlex="45%">
+                    <p>
+                        {{data.content}}
+                    </p>
+                </mat-card-content>
+
+                <mat-card-actions fxFlex="20%">
+                  <button mat-button>LIKE</button>
+                  <button mat-button>SHARE</button>
+                  <!-- <select  id="todo-items-state" name="currentstate"  value="completed"   >
+                    <option value="todo">Todo</option>
+                    <option value="inprogress">Inprogress</option>
+                    <option value="completed">Completed</option>
+                    
+                  </select> -->
+
+                  <select  matNativeControl  id="todo-items-state" name="currentstate" (change)="changeState($event, data._id)">
+                    <option *ngFor="let option of differentStates" [value]="option.value"
+                            [selected]="activeState === option.id">{{ option.viewValue }}</option>
+                  </select>
+                </mat-card-actions>
+                <div fxFlex="5%"></div>
+              </mat-card>
+
+              <br><br>
+              
+        
+      </div> 
+  </div>
+        
+<!-- 
+            <div class="flex-container">
+
+
+            </div>
+
+            <div  fxLayout="row wrap" fxLayout.xs="column" >
+
+    <mat-card  fxFlex="25%"><mat-card-title> Hello</mat-card-title></mat-card>
+    <mat-card  fxFlex="25%"><mat-card-title> Hello</mat-card-title></mat-card>
+    <mat-card  fxFlex="25%"><mat-card-title> Hello</mat-card-title></mat-card>
+    <mat-card  fxFlex="25%"><mat-card-title> Hello</mat-card-title></mat-card>
+    
+<div>q</div>
+<div>q</div>
+<div>q</div>
+<div>q</div>
+<div>q</div>
+<div>q</div>
+<div>q</div>
+<div>q</div>
+<div>q</div>
+<div>q</div>
+<div>q</div>
+<div>q</div>
+<div>q</div>
+<div>q</div>
+<div>q</div>
+<div>q</div>
+<div>q</div>
+<div>q</div>
+<div>q</div>
+<div>q</div>
+</div>
+
+
+
+<div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let num of [1,2,3,4,5,6,7]">
+      <mat-card class="mat-elevation-z4">
+        <mat-card-header>
+          <mat-card-title>Mountains {{num}}</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image src="./../assets/images/mountains.jpg" />
+        <mat-card-content>
+          <p>The Himalayas is a mountain range in Asia.</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>LIKE</button> <button mat-button>SHARE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div> -->

@@ -1,0 +1,52 @@
+
+
+
+<div class="task-form">
+
+    <form #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm.value); taskForm.reset()">
+
+       <!-- {{ taskForm.value | json}}
+    <br>
+       {{taskModel| json}}
+     <br> -->
+        <div class="form-group" >
+          <label>Task name</label><br>
+          <input   type="text"  required   #name="ngModel" 
+          [class.is-invalid]="name.invalid && name.touched" 
+          style="width: 300px;"
+          class="task-name" name="name" placeholder="" [(ngModel)]="taskModel.name">
+         <small class="text-danger" [class.d-none]="name.valid || name.untouched"> Taskname required</small>
+        </div>
+
+        <div class="form-group">
+            <label>Task description</label><br>
+            <textarea required  rows="4" cols="51"   #content="ngModel" 
+            [class.is-invalid]="content.invalid && content.touched"
+            id="new_task_textarea"
+            name="content"
+            class="task-content"  [(ngModel)]="taskModel.content"
+            placeholder=""
+           
+          ></textarea>
+          <small  class="text-danger" [class.d-none]="content.valid || content.untouched"> Task description required</small>
+        </div>
+        {{content.className}}
+      
+        
+     <div class="form-group">
+        <select  matNativeControl  required  #state="ngModel"  [class.is-invalid]="state.invalid && state.touched"  id="todo-items-state" name="currentState"  [(ngModel)]="taskModel.currentState">
+            <option *ngFor="let option of differentStates" [value]="option.value"
+                   >{{ option.viewValue }}</option>
+          </select>
+          <small class="text-danger" [class.d-none]="state.valid || state.untouched"> Please choose the current state of the task</small>
+
+     </div>
+
+       
+
+      
+       
+        <button   [disabled]="taskForm.form.invalid" class="btn btn-primary" type="submit">Submit </button>
+      </form>
+    
+</div>

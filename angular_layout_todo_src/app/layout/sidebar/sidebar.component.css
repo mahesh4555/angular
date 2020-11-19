@@ -1,0 +1,89 @@
+:host {
+  background: #027997;
+  padding: 30px;
+  /* height: 111px;
+  width: 111px; */
+}
+
+li.nav-item.active {
+  background: green;
+}
+
+.link {
+  background: rgb(25, 84, 92);
+
+  margin: 5px;
+  /* padding-left: inherit;
+  padding-right: inherit; */
+  padding: 15px;
+  /* padding-left: 20px;
+  padding-right: 20px; */
+  font-size: x-large;
+  text-decoration: none;
+  color: rgb(201, 219, 245);
+}
+
+.link.selected {
+  background: orange;
+}
+
+.link a:hover {
+  color: #1a9624;
+}
+
+.mat-sidenav-container {
+  height: 100%;
+}
+
+.mat-sidenav,
+mat-sidenav-content {
+  padding: 16px;
+}
+
+.mat-sidenav {
+  background-color: lightcoral;
+}
+
+.page-container {
+  height: 100%;
+}
+
+.side-bar {
+  height: 100%;
+  width: 170px;
+  background: lightcoral;
+}
+
+.list-items {
+  margin-top: 50px;
+  /* margin-bottom: 50px; */
+}
+
+.list-item {
+  margin-top: 50px;
+  /* margin-bottom: 110px; */
+  position: relative;
+  font-size: 30px;
+  color: white;
+  padding: 10px 10px;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+}
+.list-item.selected {
+  background: orange;
+}
+
+.list-item:hover {
+  color: orange;
+}
+
+/* .list-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 5px;
+  left: 0;
+  background-color: orange;
+} */

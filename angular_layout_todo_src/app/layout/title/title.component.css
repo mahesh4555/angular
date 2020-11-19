@@ -1,0 +1,12 @@
+:host {
+  background: #f1f1f1;
+  padding: 30px;
+  /* height: 111px;
+    width: 111px; */
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block; /* remove extra space below image */
+}
