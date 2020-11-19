@@ -1,8 +1,22 @@
+
+
+
 <!-- <p>content works! {{activeState}}</p>
 <p>{{activeState}}</p>
 <p>activeState</p> -->
 <!-- <mat-button color="green">Press me</mat-button> -->
 <button mat-raised-button color="primary">Press me</button>
+<br>
+<div>
+  <form #searchForm class="form-inline md-form mr-auto mb-4">
+
+    <input  class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"  (input)="onSearchChange($event)" >
+    <button mdbBtn size="sm" gradient="aqua" rounded="true" class="my-0 waves-light" mdbWavesEffect type="submit">Search</button>
+  </form>
+</div>
+
+
+
 <br>
 
 <!-- 
@@ -48,8 +62,33 @@
       
    <!-- </table> -->
    <!-- <mat-card>bsic crd</mat-card> -->
- 
+ <!-- <h3>Hdid</h3>
+   <cdk-virtual-scroll-viewport itemSize="4" class="container">
+   <div >
+   <p>One</p>
+   <p>One</p>
+   <p>One</p>
+   <p>One</p>
+
+   </div>
+   </cdk-virtual-scroll-viewport> -->
    <br>
+   <!-- <cdk-virtual-scroll-viewport itemSize="100" class="container">
+  
+  
+    <div *cdkVirtualFor="let number of numbers"  class="number"> {{number}}</div>
+  
+    </cdk-virtual-scroll-viewport>
+
+
+    <cdk-virtual-scroll-viewport itemSize="100" class="container">
+  
+  
+      <div *cdkVirtualFor="let number of numbers"  class="number"> {{number}}</div>
+    
+      </cdk-virtual-scroll-viewport> -->
+
+
    <br>
    <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
      <div  fxFlex="25%"  fxLayoutAlign=" stretch" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let data  of currentStatetodosData">
@@ -71,16 +110,11 @@
                 <mat-card-actions fxFlex="20%">
                   <button mat-button>LIKE</button>
                   <button mat-button>SHARE</button>
-                  <!-- <select  id="todo-items-state" name="currentstate"  value="completed"   >
-                    <option value="todo">Todo</option>
-                    <option value="inprogress">Inprogress</option>
-                    <option value="completed">Completed</option>
-                    
-                  </select> -->
+               
 
-                  <select  matNativeControl  id="todo-items-state" name="currentstate" (change)="changeState($event, data._id)">
+                   <select  matNativeControl  id="todo-items-state" name="currentstate" (change)="changeState($event, data._id)">
                     <option *ngFor="let option of differentStates" [value]="option.value"
-                            [selected]="activeState === option.id">{{ option.viewValue }}</option>
+                            [selected]="activeState === option.id">{{ differentStates[data.currentState-1].viewValue }}</option>
                   </select>
                 </mat-card-actions>
                 <div fxFlex="5%"></div>
@@ -90,7 +124,7 @@
               
         
       </div> 
-  </div>
+  </div> 
         
 <!-- 
             <div class="flex-container">
@@ -144,4 +178,4 @@
         </mat-card-actions>
       </mat-card>
     </div>
-  </div> -->
+  </div> --> 

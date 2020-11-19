@@ -42,3 +42,30 @@
 .card-header {
   height: 60px;
 }
+
+.example-viewport {
+  height: 400px;
+  width: 300px;
+  border: 1px solid black;
+}
+
+.example-item-detail {
+  height: 18px;
+}
+
+.example-alternate {
+  background: rgba(127, 127, 127, 0.3);
+}
+
+.number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid orange;
+  box-sizing: border-box;
+  height: 100px;
+}
+
+.container {
+  height: 400px;
+}

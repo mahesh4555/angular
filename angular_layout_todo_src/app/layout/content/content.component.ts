@@ -25,6 +25,8 @@ export class ContentComponent implements OnInit {
 
 
   public todosData : Array<Todo>;
+  public todoData : Array<Todo>;
+  filteredData : Array<Todo>;
   public  activeState: number;
 
   public currentStatetodosData : Array<Todo>;
@@ -35,7 +37,9 @@ export class ContentComponent implements OnInit {
     {value: '1', viewValue: 'Todo', id:1},
     {value: '2', viewValue: 'Inprogress', id:2},
     {value: '3', viewValue: 'Completed', id:3},
+    {value: '4', viewValue: 'All', id:4},
   ];
+  numbers =[]
 
   // private store: Store<AppState>,
   constructor(private store : Store<{todo:AppState}>, private todoService : TodoService, private route: ActivatedRoute) {
@@ -49,6 +53,9 @@ export class ContentComponent implements OnInit {
 
     //     // this.addTodo(data)
     // })
+    for(let i=0; i <100; i++){
+      this.numbers.push(i);
+    }
 
     this.store.pipe(select('todo')).subscribe(state => {  //'product' -> name defined in StoreModule.forRoot()
         console.log("constructor inside content")
@@ -60,6 +67,9 @@ export class ContentComponent implements OnInit {
         console.log("activestate :", this.activeState)
         // console.log(state[0])
         this.currentStatetodosData = state['todosData'].filter(todo=>{ 
+          if(this.activeState == 4){
+            return  todo.currentState
+          }
           return todo.currentState == this.activeState
 
         })
@@ -120,6 +130,55 @@ export class ContentComponent implements OnInit {
 
       // this.addTodo(data)
   })
+}
+
+
+onSearchChange(event){
+  console.log(event.target.value)
+  // this.filteredData =this.filterTodos(event.target.value)
+  // console.log("Filtered data:",this.filteredData)
+  this.currentStatetodosData =this.sortTodos(event.target.value)
+  console.log("Sorted data:",this.currentStatetodosData)
+}
+
+// filterTodos(val){
+//   var categoryList = []
+//   if (typeof val != "string") {
+//       return [];
+//   }
+//   if (val === '' || val === null) {
+//       return [];
+//   }
+//   return val ? this.todoData.filter(s => s.name.toLowerCase().indexOf(val.toLowerCase()) != -1)
+//       : this.todoData;
+
+// }
+
+
+sortTodos(val){
+  var categoryList = []
+  if (typeof val != "string") {
+      return this.currentStatetodosData;
+  }
+  if (val === '' || val === null) {
+      return this.currentStatetodosData;
+  }
+  // return val ? this.todoData.filter(s => s.name.toLowerCase().indexOf(val.toLowerCase()) != -1)
+  //     : this.todoData;
+  return this.currentStatetodosData.slice().sort((obj1, obj2) => {
+    const name1 = obj1.name.toLowerCase();
+    const name2 = obj2.name.toLowerCase();
+    console.log("n1,n2:",name1,name2)
+   let r = name1.toLowerCase().indexOf(val.toLowerCase())
+   let s = name2.toLowerCase().indexOf(val.toLowerCase())
+   console.log("r,s:",r,s)
+    if (r > s) { return -1; };
+    if (r < s) { return 1; };
+    return 0
+ 
+  
+});
+
 }
 
 
