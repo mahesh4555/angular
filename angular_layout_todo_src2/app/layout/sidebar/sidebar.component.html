@@ -1,0 +1,38 @@
+
+
+
+
+    
+<div fxLayout="column"  fxLayoutGap="0px" >
+    <h1>MENU</h1>
+   
+     <mat-divider></mat-divider>
+  <a class="link" routerLink="/add" routerLinkActive="selected" >Add</a>
+
+  <a   class="link" routerLink="/todo"  routerLinkActive="selected"(click)=changeState(1)>Todo</a>
+
+  <a  class="link"  routerLink="/inprogress"  routerLinkActive="selected"(click)=changeState(2)>Inprogress</a>
+  <a  class="link" routerLink="/completed"  routerLinkActive="selected" (click)=changeState(3)>Completed</a>
+  
+  <a  class="link" routerLink="/all" routerLinkActive="selected" (click)=changeState(4) >All</a>
+
+
+  
+  <mat-divider></mat-divider> 
+  
+
+</div>
+
+<!-- 
+<div class="page-container">
+  <div class="side-bar">
+    <div class="list-items">
+      <br>
+      <a routerLink="/add" routerLinkActive="selected" class="list-item"> Add   </a><br><br>
+      <a routerLink="/todo" routerLinkActive="selected" class="list-item"> Todo</a><br><br>
+      <a routerLink="/inprogress" routerLinkActive="selected"  class="list-item"> Inprogress</a><br><br>
+      <a routerLink="/completed" routerLinkActive="selected" class="list-item"> Completed</a><br>
+
+    </div>
+  </div>
+</div> -->

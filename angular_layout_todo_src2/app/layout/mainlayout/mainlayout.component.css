@@ -1,0 +1,22 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 100%;
+}
+
+.content {
+  background: #71fa4c;
+}
+
+.number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid orange;
+  box-sizing: border-box;
+  height: 100px;
+}
+
+.container {
+  height: 400px;
+}

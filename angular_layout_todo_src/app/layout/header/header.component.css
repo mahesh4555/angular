@@ -1,4 +1,11 @@
 :host {
-  background: hsl(0, 0%, 100%);
-  padding: 30px;
+  background: hsl(71, 35%, 91%);
+  padding: 10px;
+  /* height: 70px; */
+  flex-shrink: 0;
+
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 10;
 }

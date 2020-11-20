@@ -73,6 +73,7 @@ export class ContentComponent implements OnInit {
           return todo.currentState == this.activeState
 
         })
+        this.filteredData = this.currentStatetodosData
 
 
  
@@ -135,24 +136,27 @@ export class ContentComponent implements OnInit {
 
 onSearchChange(event){
   console.log(event.target.value)
-  // this.filteredData =this.filterTodos(event.target.value)
-  // console.log("Filtered data:",this.filteredData)
-  this.currentStatetodosData =this.sortTodos(event.target.value)
-  console.log("Sorted data:",this.currentStatetodosData)
+  this.filteredData =this.filterTodos(event.target.value)
+  console.log("Filtered data:",this.filteredData)
+  // this.currentStatetodosData =this.sortTodos(event.target.value)
+  // console.log("Sorted data:",this.currentStatetodosData)
 }
 
-// filterTodos(val){
-//   var categoryList = []
-//   if (typeof val != "string") {
-//       return [];
-//   }
-//   if (val === '' || val === null) {
-//       return [];
-//   }
-//   return val ? this.todoData.filter(s => s.name.toLowerCase().indexOf(val.toLowerCase()) != -1)
-//       : this.todoData;
+filterTodos(val){
+  var categoryList = []
 
-// }
+  if (val === '' || val === null) {
+      return this.currentStatetodosData;
+  }
+  if (typeof val != "string") {
+    return this.currentStatetodosData;
+}
+  return val ? this.currentStatetodosData.filter(s => s.name.toLowerCase().indexOf(val.toLowerCase()) != -1)
+      : this.currentStatetodosData;
+
+    
+
+}
 
 
 sortTodos(val){

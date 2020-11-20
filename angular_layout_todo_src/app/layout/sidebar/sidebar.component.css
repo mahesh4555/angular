@@ -1,23 +1,18 @@
 :host {
   background: #027997;
-  padding: 30px;
-  /* height: 111px;
-  width: 111px; */
-}
+  padding: 10px;
+  height: 100vh;
+  /* width: 100vw; */
+  flex-grow: 1;
 
-li.nav-item.active {
-  background: green;
+  position: sticky;
+  top: 0;
 }
 
 .link {
   background: rgb(25, 84, 92);
-
   margin: 5px;
-  /* padding-left: inherit;
-  padding-right: inherit; */
   padding: 15px;
-  /* padding-left: 20px;
-  padding-right: 20px; */
   font-size: x-large;
   text-decoration: none;
   color: rgb(201, 219, 245);
@@ -44,24 +39,24 @@ mat-sidenav-content {
   background-color: lightcoral;
 }
 
-.page-container {
+/* .page-container {
   height: 100%;
-}
+} */
 
-.side-bar {
+/* .side-bar {
   height: 100%;
   width: 170px;
   background: lightcoral;
-}
+} */
 
-.list-items {
+/* .list-items {
   margin-top: 50px;
-  /* margin-bottom: 50px; */
-}
-
-.list-item {
+   //margin-bottom: 50px; 
+} */
+/* 
+/* .list-item {
   margin-top: 50px;
-  /* margin-bottom: 110px; */
+ // margin-bottom: 110px;
   position: relative;
   font-size: 30px;
   color: white;
@@ -69,14 +64,15 @@ mat-sidenav-content {
   align-items: center;
   cursor: pointer;
   text-decoration: none;
-}
-.list-item.selected {
-  background: orange;
-}
+} */
 
-.list-item:hover {
+/* .list-item.selected {
+  background: orange;
+} */
+
+/* .list-item:hover {
   color: orange;
-}
+}  */
 
 /* .list-item::before {
   content: "";

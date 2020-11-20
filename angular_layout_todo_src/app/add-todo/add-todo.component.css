@@ -1,5 +1,5 @@
 :host {
-  background: hsl(60, 7%, 86%);
+  /* background: hsl(60, 7%, 86%); */
   padding: 30px;
   height: stretch;
   width: stretch;
@@ -13,6 +13,7 @@
 }
 
 .task-form {
+  background: hsl(60, 7%, 86%);
   margin: 30px;
   padding: 30px;
 }
