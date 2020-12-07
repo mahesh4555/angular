@@ -4,7 +4,7 @@ import {AppState} from '../../store/reducers/todo.reducer'
 import {ADD_TODO, CHANGE_LOGIN_STATUS} from '../../store/actions/todo.actions'
 import {HttpClient, HttpErrorResponse} from '@angular/common/http'
 import {  CookieService } from 'ngx-cookie-service';  
-
+import {LoginAuthService} from "../../login-auth.service"
 import { SocialAuthService } from "angularx-social-login";
 
 @Component({
@@ -18,7 +18,9 @@ export class HeaderComponent implements OnInit {
   public url : string = "http://localhost:4000/"
 
   constructor(private store : Store<{todo:AppState}>, private http:HttpClient, 
-    private cookieService: CookieService,  private authService: SocialAuthService) { 
+    private cookieService: CookieService,  private authService: SocialAuthService,
+    private login_api :LoginAuthService
+    ) { 
 
     this.store.pipe(select('todo')).subscribe(state => {  //'product' -> name defined in StoreModule.forRoot()
     console.log("constructor inside header")
@@ -69,14 +71,7 @@ export class HeaderComponent implements OnInit {
 
    
   logout(){
-    this.authService.signOut();
-    let payload : boolean = false;
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
-    this.store.dispatch(
-    new CHANGE_LOGIN_STATUS(payload)   //type is mentioned in product.action.ts
-  
-  );
+    this.login_api.logout();
  
   console.log("logout")
   console.log(this.cookieService.get('username'));  

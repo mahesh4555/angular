@@ -44,7 +44,7 @@
                             [selected]="activeState === option.id">{{ option.viewValue }}</option>
                   </select>
 
-                  <button mat-button (click)="openDialog(data)">Edit</button>
+                  <button mat-button (click)="editTodo(data)">Edit</button>
                   <button mat-button (click)="deleteTodo(data)">Delete</button>
                 </mat-card-actions>
                 <div fxFlex="10%"></div>

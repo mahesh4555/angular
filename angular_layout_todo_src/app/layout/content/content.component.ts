@@ -41,7 +41,7 @@ export class ContentComponent implements OnInit {
     {value: '3', viewValue: 'Completed', id:3},
     {value: '4', viewValue: 'All', id:4},
   ];
-  numbers =[];
+
   loggedInStatus: boolean ;
   url : string = "http://localhost:4000/";
 
@@ -50,18 +50,6 @@ export class ContentComponent implements OnInit {
     private route: ActivatedRoute,private http:HttpClient,
     public dialog : MatDialog) {
 
-    console.log("In content layout, call getdata")
-    // this.todoService.getData().subscribe(data =>{
-    //     console.log("In content layout, Fetched data :", data);
-    //     this.todoData = data;
-
-    //     console.log("content layout todoData fetched:", this.todoData)
-
-    //     // this.addTodo(data)
-    // })
-    for(let i=0; i <100; i++){
-      this.numbers.push(i);
-    }
 
     this.store.pipe(select('todo')).subscribe(state => {  //'product' -> name defined in StoreModule.forRoot()
         console.log("constructor inside content")
@@ -70,8 +58,8 @@ export class ContentComponent implements OnInit {
         // this.todosData = state['todosData']
         this.activeState = state['activeState']
         this.loggedInStatus = state['isLoggedIn']
-       console.log("loggedInStatus:",this.loggedInStatus)
-        // console.log("All:",this.todosData)
+        console.log("loggedInStatus:",this.loggedInStatus)
+
         console.log("activestate :", this.activeState)
         // console.log(state[0])
         this.currentStatetodosData = state['todosData'].filter(todo=>{ 
@@ -95,8 +83,7 @@ export class ContentComponent implements OnInit {
 
 
    }
-  // constructor(private dataService: DataService) { }
-  // 
+  
   ngOnInit() {
    
     console.log(" ngOnInit Content")
@@ -104,7 +91,7 @@ export class ContentComponent implements OnInit {
 
  }
 
- openDialog(data : Object){
+ editTodo(data : Object){
    console.log("Dialog :",data)
 
   const dialogRef = this.dialog.open(EditTodoComponentComponent,
@@ -114,11 +101,23 @@ export class ContentComponent implements OnInit {
 
   dialogRef.afterClosed().subscribe(result => {
     console.log('The dialog was closed');
-
   });
-  console.log("d")
-  // (EditTodoComponentComponent)
+ 
+  
  }
+
+ deleteTodo(data){
+  console.log("deleteTodo")
+  console.log(data)
+  let payload : any = data
+  console.log("Task deleteData")
+
+  this.store.dispatch(
+    new DELETE_TODO(payload)   //type is mentioned in product.action.ts
+  
+  );
+}
+
 
   
 
@@ -127,9 +126,7 @@ export class ContentComponent implements OnInit {
     console.log(event.target.id)
     console.log(event.target.value)
     console.log(id)
-    
-
-
+ 
     let data = {
       _id: id,
       changedState: event.target.value,
@@ -142,13 +139,6 @@ export class ContentComponent implements OnInit {
         new UPDATE_TODO(payload)   //type is mentioned in product.action.ts
       
       );
-
-     
-      // this.todoData = data;
-
-      // console.log("content layout todoData fetched:", this.todoData)
-
-      // this.addTodo(data)
   })
 }
 
@@ -172,8 +162,6 @@ filterTodos(val){
 }
   return val ? this.currentStatetodosData.filter(s => s.name.toLowerCase().indexOf(val.toLowerCase()) != -1)
       : this.currentStatetodosData;
-
-    
 
 }
 
@@ -203,21 +191,6 @@ sortTodos(val){
 });
 
 }
-
-
-
-deleteTodo(data){
-  console.log("deleteTodo")
-  console.log(data)
-  let payload : any = data
-  console.log("Task deleteData")
-
-  this.store.dispatch(
-    new DELETE_TODO(payload)   //type is mentioned in product.action.ts
-  
-  );
-}
-
 
 
 }

@@ -18,8 +18,6 @@ export class AddTodoComponent implements OnInit {
     {value: '2', viewValue: 'Inprogress', id:2},
     {value: '3', viewValue: 'Completed', id:3},
   ];
-  
-
 
   taskModel = new TodoTask("","","",1)
 
@@ -31,8 +29,6 @@ export class AddTodoComponent implements OnInit {
 
     this.loggedInStatus = state['isLoggedIn']
     console.log("loggedInStatus:",this.loggedInStatus)
-    
-
 
  });
 
@@ -44,10 +40,6 @@ export class AddTodoComponent implements OnInit {
   }
 
 
-  changeState(a,b){
-    
-  }
-
   onSubmit(todo){
     console.log("submitted data :",this.taskModel)
     console.log("submittedc data :",todo)
@@ -56,12 +48,8 @@ export class AddTodoComponent implements OnInit {
 
   addData(data){
 
-
-  
     this.todoService.addData(data).subscribe(new_data =>{
       console.log("In add todo component, Fetched data :", new_data);
-     
-
       let payload : any = new_data
       this.store.dispatch(
       new ADD_TODO(payload)   //type is mentioned in product.action.ts

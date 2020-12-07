@@ -23,8 +23,6 @@ export class EditTodoComponentComponent implements OnInit {
 
   
   constructor(@Inject(MAT_DIALOG_DATA) public data : any,private store : Store<{todo:AppState}>,private todoService : TodoService) {
-
-
     //  this.taskModel = this.data;
      console.log("constructor EDIT TODO  data :",this.taskModel)
     
@@ -34,15 +32,12 @@ export class EditTodoComponentComponent implements OnInit {
 
     // this.loggedInStatus = state['isLoggedIn']
     // console.log("loggedInStatus:",this.loggedInStatus)
-    
-
-
  });
 
    }
 
   ngOnInit(): void {
-    console.log("edit onInit")
+    console.log("edit-todo onInit")
     this.taskModel = new TodoTask(this.data._id,this.data.name,this.data.content,this.data.currentState);
   }
 
@@ -56,11 +51,7 @@ export class EditTodoComponentComponent implements OnInit {
     todo['_id'] = this.taskModel.id;
     console.log("submitted edit data :",todo)
     this.updateData(todo)
-
-
   }
-
-
 
   updateData(data){
 

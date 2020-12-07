@@ -21,6 +21,8 @@ export class LoginComponent implements OnInit {
 
   public loggedInStatus: boolean;
    public errorMsg: string;
+   public loading= false;
+
 
    public cookieUsername: string;
    public cookiePassword: string;
@@ -58,53 +60,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     console.log("ngOnInt login");
 
-    this.authService.authState.subscribe((user) => {
-      this.user = user;
-      this.socialLoggedIn = (user != null);
-
-      console.log("USER :",this.user)
-     
-      console.log("socialLoggedIn :",this.socialLoggedIn)
-
-      if(user){
-
-        console.log("USER :",user['email'])
-        console.log("USER :",user['idToken'])
-      
-
-      var  data = {"email":user['email'], token:user['idToken']}
-
-      this.login_api.login_post_google_api(data).subscribe(
-        data =>{
-                 console.log("login response data :", data);
-                var  login_response = data;
-           
-
-
- 
-                 let payload : boolean = true;
-                 this.store.dispatch(
-                   new CHANGE_LOGIN_STATUS(payload)
-                   )
- 
-                 this.router.navigate(['/todo'])
-                 
-                     
-                 },
-     
-     error => {
-       console.log("login error response data :", error);
-       this.errorMsg=error;
-      }
-      
-      
-      );
-    }
- 
-    
- 
- 
-    });
     
 
   }
@@ -115,7 +70,7 @@ export class LoginComponent implements OnInit {
 
 
 
-
+//normal login by user_id and password
   onSubmit(logincredentials:any){
 
 
@@ -126,6 +81,7 @@ export class LoginComponent implements OnInit {
 
 
     var login_response:Object;
+    this.loading = true; //after google sign in, waiting time for backend verification, is loading
 
      this.login_api.login_post_api(login_data).subscribe(
        data =>{
@@ -155,13 +111,14 @@ export class LoginComponent implements OnInit {
                 console.log(this.cookieService.get('username'));  
                 console.log(this.cookieService.get('password'));  
 
+
                 let payload : boolean = true;
                 this.store.dispatch(
                   new CHANGE_LOGIN_STATUS(payload)
                   )
 
                 this.router.navigate(['/todo'])
-                
+                this.loading = false;
                     
                 },
     
@@ -184,14 +141,19 @@ export class LoginComponent implements OnInit {
   }
   
   logout(){
-    this.signOut();
-    let payload : boolean = false;
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
-    this.store.dispatch(
-    new CHANGE_LOGIN_STATUS(payload)   //type is mentioned in product.action.ts
+
+ 
+
+    this.login_api.logout();
+
+
+    // let payload : boolean = false;
+    // localStorage.removeItem("token");
+    // localStorage.removeItem("username");
+    // this.store.dispatch(
+    // new CHANGE_LOGIN_STATUS(payload)   //type is mentioned in product.action.ts
   
-  );
+  // );
  
   console.log("logout")
   console.log(this.cookieService.get('username'));  
@@ -207,13 +169,56 @@ export class LoginComponent implements OnInit {
 
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.socialLoggedIn = (user != null);
+
+      console.log("USER :",this.user)
+     
+      console.log("socialLoggedIn :",this.socialLoggedIn)
+
+      if(user){
+
+        console.log("USER :",user['email'])
+        console.log("USER :",user['idToken'])
+      
+
+      var  data = {"email":user['email'], token:user['idToken']}
+
+      this.login_api.login_post_google_api(data).subscribe(
+        data =>{
+                 console.log("login response data :", data);
+                var  login_response = data;
+
+                 let payload : boolean = true;
+                 this.store.dispatch(
+                   new CHANGE_LOGIN_STATUS(payload)
+                   )
+ 
+                 this.router.navigate(['/todo'])
+  
+                 },
+     
+     error => {
+       console.log("login error response data :", error);
+       this.errorMsg=error;
+      }
+      
+      
+      );
+    }
+
+ 
+    });
+    
   }
 
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
   }
 
-  signOut(): void {
+  socialSignOut(): void {
     this.authService.signOut();
   }
 

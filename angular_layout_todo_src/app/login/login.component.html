@@ -40,7 +40,7 @@
 </div>
 
 
-<div *ngIf="loggedInStatus" class="logout">
+<div *ngIf="socialLoggedIn" class="logout">
  
   <img src="{{ user.photoUrl }}">
   <div>
@@ -48,5 +48,13 @@
     <p>{{ user.email }}</p>
   </div>
 <button mat-raised-button color="primary"(click)="logout()"> Logout </button>
+
+  </div>
+
+
+  
+<div *ngIf="loading" class="logout">
+ 
+  <p>Loading, please wait</p>
 
   </div>
