@@ -23,6 +23,7 @@ export class MainlayoutComponent implements OnInit {
   filteredData : Array<Todo>;
   sortedData : Array<Todo>;
   numbers=[]
+  loggedInStatus : boolean ;
   constructor(private store : Store<{todo:AppState}>, private todoService : TodoService) {
  
      for(let i=0; i <100; i++){
@@ -45,6 +46,9 @@ export class MainlayoutComponent implements OnInit {
 
         this.todoData = state['todosData']
         console.log("All:",this.todoData)
+        this.loggedInStatus = state['isLoggedIn']
+        console.log("loggedInStatus:",this.loggedInStatus)
+        
 
  
      });

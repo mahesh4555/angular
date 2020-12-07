@@ -1,0 +1,52 @@
+
+
+<div *ngIf="loggedInStatus==false" class="login-form"> 
+<p>login works!</p>
+<mat-card>
+    <mat-card-title>Login</mat-card-title>
+<mat-card-content>
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value); loginForm.reset()">
+
+     <!-- {{ loginForm.value | json}} -->
+ 
+     <div class="form-group" >
+       <label>Email</label><br>
+       <input   type="text"  required  
+       [class.is-invalid]="username.invalid && username.touched" 
+       style="width: 300px;"
+       class="" name="username" placeholder="" [(ngModel)]="cookieUsername" #username="ngModel">
+      <small class="text-danger" [class.d-none]="username.valid || username.untouched"> Username  required</small>
+     </div>
+
+     <div class="form-group">
+         <label>Task description</label><br>
+         <input   type="password"  required   #password="ngModel" 
+       [class.is-invalid]="password.invalid && password.touched" 
+       style="width: 300px;"
+       class="" name="password" placeholder="" [(ngModel)]="cookiePassword" #password="ngModel">
+       <small  class="text-danger" [class.d-none]="password.valid || password.untouched">  Password required</small>
+     </div>
+
+     <input type="checkbox" id="remember" name="remember-me" value="false"  ngModel>
+     <label for="remember">Remember me</label><br>
+     <button   [disabled]="loginForm.form.invalid" class="btn btn-primary" type="submit">Submit </button>
+   </form>
+
+   {{errorMsg}}
+
+   <button mat-raised-button color="primary"(click)="signInWithGoogle()"> Google Sign In </button>
+</mat-card-content>
+</mat-card>
+</div>
+
+
+<div *ngIf="loggedInStatus" class="logout">
+ 
+  <img src="{{ user.photoUrl }}">
+  <div>
+    <h4>{{ user.name }}</h4>
+    <p>{{ user.email }}</p>
+  </div>
+<button mat-raised-button color="primary"(click)="logout()"> Logout </button>
+
+  </div>

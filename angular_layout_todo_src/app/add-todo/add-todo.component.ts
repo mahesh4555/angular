@@ -12,18 +12,35 @@ import {ADD_TODO} from '../store/actions/todo.actions'
 })
 export class AddTodoComponent implements OnInit {
 
-
+  loggedInStatus: boolean;
   public differentStates: Array<Object> = [
     {value: '1', viewValue: 'Todo', id:1},
     {value: '2', viewValue: 'Inprogress', id:2},
     {value: '3', viewValue: 'Completed', id:3},
   ];
+  
 
-  taskModel = new TodoTask("","",1)
 
-  constructor(private store : Store<{todo:AppState}>,private todoService : TodoService) { }
+  taskModel = new TodoTask("","","",1)
+
+  constructor(private store : Store<{todo:AppState}>,private todoService : TodoService) {
+
+    this.store.pipe(select('todo')).subscribe(state => {  //'product' -> name defined in StoreModule.forRoot()
+    console.log("constructor inside header")
+    console.log("State:",state)
+
+    this.loggedInStatus = state['isLoggedIn']
+    console.log("loggedInStatus:",this.loggedInStatus)
+    
+
+
+ });
+
+   }
 
   ngOnInit(): void {
+
+    
   }
 
 
@@ -38,6 +55,9 @@ export class AddTodoComponent implements OnInit {
   }
 
   addData(data){
+
+
+  
     this.todoService.addData(data).subscribe(new_data =>{
       console.log("In add todo component, Fetched data :", new_data);
      

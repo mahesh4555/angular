@@ -34,12 +34,30 @@ import {ScrollingModule} from '@angular/cdk/scrolling'
 //   MatIconModule, MatInputModule,
 //   MatAutocompleteModule, MatChipsModule,
 //   MatFormFieldModule
-
+import { CookieService } from 'ngx-cookie-service';
 
 // } from '@angular/material';
 import { TitleComponent } from './layout/title/title.component';
 import { AddTodoComponent } from './add-todo/add-todo.component';
+import { LoginComponent } from './login/login.component';
+import { LoggedOutScreenComponent } from './logged-out-screen/logged-out-screen.component';
+import { EditTodoComponentComponent } from './edit-todo-component/edit-todo-component.component';
+
+import {MatDialogModule} from '@angular/material/dialog';
 // import { TitleComponent } from './title/title.component';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from 'angularx-social-login';
+
+
+
+
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,8 +68,13 @@ import { AddTodoComponent } from './add-todo/add-todo.component';
     MainlayoutComponent,
     TitleComponent,
     AddTodoComponent,
-    
+    LoginComponent,
+    LoggedOutScreenComponent,
+    EditTodoComponentComponent,
+
   ],
+
+  entryComponents:[EditTodoComponentComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -71,10 +94,30 @@ import { AddTodoComponent } from './add-todo/add-todo.component';
     MatChipsModule,
     MatFormFieldModule,
     MatInputModule,
-    ScrollingModule
+    ScrollingModule,
+    MatDialogModule,
+    SocialLoginModule
 
   ],
-  providers: [],
+  providers: [CookieService,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '874607787308-r3vkocggamqukjvfeg1t3f13pc6c3abu.apps.googleusercontent.com'
+            )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('874607787308-r3vkocggamqukjvfeg1t3f13pc6c3abu.apps.googleusercontent.com')
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

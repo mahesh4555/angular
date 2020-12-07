@@ -4,11 +4,13 @@
 
 
 
-<div class="ccontent">
+<div *ngIf="loggedInStatus==true" class="content">
+  <br>
+  <br>
 <div >
   <form #searchForm class="form-inline md-form mr-auto mb-4">
 
-    <input  class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"  (input)="onSearchChange($event)" >
+    <input  class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"  (input)="onSearchChange($event)" >
     <!-- <button mdbBtn size="sm" gradient="aqua" rounded="true" class="my-0 waves-light" mdbWavesEffect type="submit">Search</button> -->
   </form>
 </div>
@@ -16,7 +18,7 @@
 
    
    <div class="cards-grid" fxLayout="row wrap"   fxLayoutAlign="start start" fxLayoutGap="20px grid">
-     <div class="cards"  fxFlex="30%" fxFlexAlign="stretch" fxLayoutAlign=" stretch" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let data  of filteredData">
+     <div class="cards"  fxFlex="33%" fxFlexAlign="stretch" fxLayoutAlign=" stretch" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let data  of filteredData">
             <mat-card  example-card list-content fxLayout="column">
               
                 <mat-card-header fxLayout="column" fxFlex="30%" >
@@ -26,26 +28,36 @@
               </mat-card-header>
       
 
-                <mat-card-content  fxFlex="45%">
+                <mat-card-content  fxFlex="40%">
                     <p>
                         {{data.content}}
                     </p>
                 </mat-card-content>
 
                 <mat-card-actions fxFlex="20%">
-                  <button mat-button>LIKE</button>
-                  <button mat-button>SHARE</button>
+                 
+               
                <br>
 
                    <select  matNativeControl  id="todo-items-state" name="currentstate" (change)="changeState($event, data._id)">
                     <option *ngFor="let option of differentStates" [value]="option.value"
                             [selected]="activeState === option.id">{{ option.viewValue }}</option>
                   </select>
+
+                  <button mat-button (click)="openDialog(data)">Edit</button>
+                  <button mat-button (click)="deleteTodo(data)">Delete</button>
                 </mat-card-actions>
-                <div fxFlex="5%"></div>
+                <div fxFlex="10%"></div>
               </mat-card>
 
               <br><br>
       </div> 
   </div> 
 </div>
+
+
+
+<app-logged-out-screen  *ngIf="loggedInStatus==false">
+
+</app-logged-out-screen>
+

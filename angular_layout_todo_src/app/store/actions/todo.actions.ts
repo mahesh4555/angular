@@ -40,3 +40,11 @@ export class CHANGE_STATE implements ActionParent {
     // payload: any;
     constructor(public payload : any) {}
 }
+
+
+
+export class CHANGE_LOGIN_STATUS implements ActionParent {
+    type= TodoActionTypes.CHANGE_LOGIN_STATUS;
+    // payload: any;
+    constructor(public payload : any) {}
+}

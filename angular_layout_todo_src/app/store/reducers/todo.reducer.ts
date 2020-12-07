@@ -14,6 +14,7 @@ import { TodoActionTypes } from '../shared/todo-action-types.enum';
 export interface AppState {
     todosData  : Todo[],
     activeState : number,
+    isLoggedIn : boolean,
 
 }
 
@@ -27,7 +28,8 @@ export interface AppState {
                         "content": "1"
                         },
                ],
-    activeState : 1
+    activeState : 1,
+    isLoggedIn: false
   
 }
 
@@ -62,10 +64,10 @@ export const TodoReducer = (state = initialState, action:ActionParent) =>{
             //         return todos})]}
             
     
-    // case  TodoActionTypes.DELETE_TODO:
-    //     // return [...state, action.payload];
-    //     console.log(state.todosData)
-    //     return  { ...state,  todosData:[...state.todosData.filter(todosData=> todosData.name != action.payload)] }
+    case  TodoActionTypes.DELETE_TODO:
+        // return [...state, action.payload];
+        console.log(state.todosData)
+        return  { ...state,  todosData:[...state.todosData.filter(todosData=> todosData._id != action.payload._id)] }
        
 
         
@@ -82,6 +84,12 @@ export const TodoReducer = (state = initialState, action:ActionParent) =>{
     
                 return todosData
             } )] }
+
+
+    case  TodoActionTypes.CHANGE_LOGIN_STATUS:
+                // return [...state, action.payload];
+        console.log("login:",state.isLoggedIn)
+        return  {...state,  isLoggedIn:  action.payload }
         
     default:
         return state;

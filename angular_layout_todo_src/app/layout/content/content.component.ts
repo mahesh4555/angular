@@ -8,13 +8,15 @@ import { map, filter } from 'rxjs/operators';
 import {Todo} from '../../store/models/todo.model'
 import {TodoService} from '../../todo.service'
 
-import {ADD_TODO, ADD_ALL_TODO,DELETE_TODO, UPDATE_TODO} from '../../store/actions/todo.actions'
+import {ADD_TODO, ADD_ALL_TODO,DELETE_TODO, UPDATE_TODO,CHANGE_LOGIN_STATUS} from '../../store/actions/todo.actions'
 import {ActivatedRoute,ParamMap} from '@angular/router'
 // import { parse } from 'path';
+import {HttpClient} from '@angular/common/http'
 
 // import {} from '@angular/router'
 
-
+import   {MatDialog} from '@angular/material/dialog'
+import {EditTodoComponentComponent} from '../../edit-todo-component/edit-todo-component.component'
 
 @Component({
   selector: 'app-content',
@@ -39,12 +41,16 @@ export class ContentComponent implements OnInit {
     {value: '3', viewValue: 'Completed', id:3},
     {value: '4', viewValue: 'All', id:4},
   ];
-  numbers =[]
+  numbers =[];
+  loggedInStatus: boolean ;
+  url : string = "http://localhost:4000/";
 
   // private store: Store<AppState>,
-  constructor(private store : Store<{todo:AppState}>, private todoService : TodoService, private route: ActivatedRoute) {
+  constructor(private store : Store<{todo:AppState}>, private todoService : TodoService, 
+    private route: ActivatedRoute,private http:HttpClient,
+    public dialog : MatDialog) {
 
-    // console.log("In content layout, call getdata")
+    console.log("In content layout, call getdata")
     // this.todoService.getData().subscribe(data =>{
     //     console.log("In content layout, Fetched data :", data);
     //     this.todoData = data;
@@ -63,6 +69,8 @@ export class ContentComponent implements OnInit {
 
         // this.todosData = state['todosData']
         this.activeState = state['activeState']
+        this.loggedInStatus = state['isLoggedIn']
+       console.log("loggedInStatus:",this.loggedInStatus)
         // console.log("All:",this.todosData)
         console.log("activestate :", this.activeState)
         // console.log(state[0])
@@ -90,18 +98,29 @@ export class ContentComponent implements OnInit {
   // constructor(private dataService: DataService) { }
   // 
   ngOnInit() {
-    // this.dataService.getData().subscribe(
-    //   (data) => (this.data = data,
-    //     console.log(this.data)
-    //     ),
-    //   (error) => {
-    //     this.errorMsg = error;
-    //     console.log(this.errorMsg);
-    //   }
-    // );
-    // console.log('hello completed');
-    // console.log(this.data);
-  }
+   
+    console.log(" ngOnInit Content")
+   
+
+ }
+
+ openDialog(data : Object){
+   console.log("Dialog :",data)
+
+  const dialogRef = this.dialog.open(EditTodoComponentComponent,
+    { height: '500px',
+    width: '700px', data : data}, 
+  );
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed');
+
+  });
+  console.log("d")
+  // (EditTodoComponentComponent)
+ }
+
+  
 
   changeState(event,id){
     console.log("event:", event)
@@ -183,6 +202,20 @@ sortTodos(val){
   
 });
 
+}
+
+
+
+deleteTodo(data){
+  console.log("deleteTodo")
+  console.log(data)
+  let payload : any = data
+  console.log("Task deleteData")
+
+  this.store.dispatch(
+    new DELETE_TODO(payload)   //type is mentioned in product.action.ts
+  
+  );
 }
 
 

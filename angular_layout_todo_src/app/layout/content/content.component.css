@@ -54,3 +54,8 @@ div.ex2 {
   height: 400px;
   overflow: scroll;
 }
+
+select,
+button {
+  float: left;
+}

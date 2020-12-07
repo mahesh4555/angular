@@ -1,0 +1,11 @@
+.login-form {
+  background: hsl(60, 7%, 86%);
+  margin: 30px;
+  padding: 30px;
+}
+
+.logout {
+  margin: auto;
+  width: 50%;
+  padding: 70px 0;
+}

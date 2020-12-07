@@ -1,1 +1,4 @@
 <b>TODO STATUS TRACKMAP TODO STATUS TRACKMAP TODO STATUS TRACKMAP </b>
+<button *ngIf="!loggedInStatus" mat-raised-button color="primary"  routerLink="/login"  >Login</button>
+
+<button *ngIf="loggedInStatus" mat-raised-button color="primary"  routerLink="/login" (click)="logout()" >Logout</button>

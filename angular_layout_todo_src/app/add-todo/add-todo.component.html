@@ -1,7 +1,7 @@
 
 
 
-<div class="task-form">
+<div *ngIf="loggedInStatus==true" class="task-form">
 
     <form #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm.value); taskForm.reset()">
 
@@ -42,11 +42,12 @@
 
      </div>
 
-       
-
-      
-       
+ 
         <button   [disabled]="taskForm.form.invalid" class="btn btn-primary" type="submit">Submit </button>
       </form>
     
 </div>
+
+<app-logged-out-screen  *ngIf="loggedInStatus==false">
+
+</app-logged-out-screen>

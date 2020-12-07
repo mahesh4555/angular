@@ -1,9 +1,0 @@
-export enum TodoActionTypes {
-
-    ADD_TODO ='ADD_TODO',
-    DELETE_TODO ='DELETE_TODO',
-    UPDATE_TODO ='UPDATE_TODO',
-    ADD_ALL_TODO='ADD_ALL_TODO',
-    CHANGE_STATE='CHANGE_STATE'
-
-}

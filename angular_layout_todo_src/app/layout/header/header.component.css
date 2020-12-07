@@ -4,8 +4,13 @@
   /* height: 70px; */
   flex-shrink: 0;
 
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100%;
   z-index: 10;
+}
+
+.mat-raised-button {
+  float: right;
+  margin: 0 20px;
 }

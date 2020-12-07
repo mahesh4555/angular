@@ -27,8 +27,14 @@ export class TodoService {
 
 
   addData(data : Todo): Observable<Todo[]>{
+
+     var responseToken = localStorage.getItem('token')
     console.log("In todo service postData")
-    return this.http.post<Todo[]>(this.url+"addData",data,{responseType: 'json'})
+    return this.http.post<Todo[]>(this.url+"addData",data,{ headers: {
+      Authorization: "Bearer " +  responseToken,
+    }, responseType: 'json'
+  
+  })
     .pipe(
       tap( // Log the result or error
         data => console.log("In todo service :",data),
@@ -38,6 +44,17 @@ export class TodoService {
     );
 
   }
+
+  login_post_api(data : Object): Observable<any>{
+    console.log("In todo service login_post_api");
+    return this.http.post<any>(this.url+"api/auth/login",data,{responseType: 'json'})
+   
+      //  catchError(this.handleError(e))
+  
+
+  }
+
+
 
   
 
